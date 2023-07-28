@@ -8,4 +8,5 @@ const express_1 = __importDefault(require("express"));
 const quotes_controllers_1 = require("../Controllers/quotes.controllers");
 exports.quotesRouter = express_1.default.Router();
 exports.quotesRouter.get('/', quotes_controllers_1.getQuotes);
+exports.quotesRouter.get('/random', quotes_controllers_1.getRandomQuote);
 //# sourceMappingURL=quotes.router.js.map

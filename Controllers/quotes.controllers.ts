@@ -7,3 +7,8 @@ import {quotes} from "../data";
 export const getQuotes = (req: Request, res: Response, next: NextFunction) => {
   res.status(200).send(quotes);
 };
+
+export const getRandomQuote = (req: Request, res:Response, next: NextFunction) => {
+  const index = Math.floor(Math.random() * quotes.length);
+  res.status(200).send(quotes[index]);
+}
