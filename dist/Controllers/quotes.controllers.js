@@ -3,7 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.putQuote = exports.postQuote = exports.getRandomQuote = exports.getQuotes = void 0;
 const data_1 = require("../data");
 const getQuotes = (req, res, next) => {
-    res.status(200).send({ quotes: data_1.quotes });
+    console.log(req.query);
+    if (req.query.person) {
+        const filteredQuotes = data_1.quotes.filter((quote) => quote.person === req.query.person);
+        res.status(200).send({ quotes: filteredQuotes });
+    }
+    else {
+        res.status(200).send({ quotes: data_1.quotes });
+    }
 };
 exports.getQuotes = getQuotes;
 const getRandomQuote = (req, res, next) => {

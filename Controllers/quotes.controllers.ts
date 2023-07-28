@@ -4,7 +4,14 @@ import { Response } from "express";
 import { Quote, quotes } from "../data";
 
 export const getQuotes = (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({ quotes: quotes });
+  if (req.query.person) {
+    const filteredQuotes = quotes.filter(
+      (quote) => quote.person === req.query.person
+    );
+    res.status(200).send({ quotes: filteredQuotes });
+  } else {
+    res.status(200).send({ quotes: quotes });
+  }
 };
 
 export const getRandomQuote = (
