@@ -12,18 +12,16 @@ const getRandomQuote = (req, res, next) => {
 };
 exports.getRandomQuote = getRandomQuote;
 const postQuote = (req, res, next) => {
-    // const { quote, person } = req.query;
-    // if (quote && person) {
-    // quotes.push({ quote, person });
-    // res.status(201).send({ quote: { quote, person } });
-    // } else {
-    //   res.status(400).send();
-    // }
     console.log(req.query);
     if (req.query) {
-        data_1.quotes.push(req.query);
-        console.log(data_1.quotes);
-        res.status(201).send({ quote: req.query });
+        const { quote, person } = req.query;
+        if (typeof quote === "string" && typeof person === "string") {
+            data_1.quotes.push({ quote, person, id: data_1.quotes[data_1.quotes.length - 1].id + 1 });
+            res.status(201).send({ quote: req.query });
+        }
+        else {
+            res.status(400).send();
+        }
     }
     else {
         res.status(400).send();

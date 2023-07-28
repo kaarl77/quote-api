@@ -17,18 +17,15 @@ export const getRandomQuote = (
 };
 
 export const postQuote = (req: Request, res: Response, next: NextFunction) => {
-  // const { quote, person } = req.query;
-  // if (quote && person) {
-  // quotes.push({ quote, person });
-  // res.status(201).send({ quote: { quote, person } });
-  // } else {
-  //   res.status(400).send();
-  // }
   console.log(req.query);
   if (req.query) {
-    quotes.push(req.query as Quote);
-    console.log(quotes);
-    res.status(201).send({ quote: req.query });
+    const { quote, person } = req.query;
+    if (typeof quote === "string" && typeof person === "string") {
+      quotes.push({ quote, person, id: quotes[quotes.length - 1].id + 1 });
+      res.status(201).send({ quote: req.query });
+    } else {
+      res.status(400).send();
+    }
   } else {
     res.status(400).send();
   }
