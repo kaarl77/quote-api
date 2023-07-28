@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postQuote = exports.getRandomQuote = exports.getQuotes = void 0;
+exports.putQuote = exports.postQuote = exports.getRandomQuote = exports.getQuotes = void 0;
 const data_1 = require("../data");
 const getQuotes = (req, res, next) => {
     res.status(200).send({ quotes: data_1.quotes });
@@ -28,4 +28,26 @@ const postQuote = (req, res, next) => {
     }
 };
 exports.postQuote = postQuote;
+const putQuote = (req, res, next) => {
+    const { id } = req.params;
+    const { quote, person } = req.query;
+    if (typeof quote === "string" && typeof person === "string") {
+        console.log("good data");
+        const quoteIndex = data_1.quotes.findIndex((quote) => quote.id === parseInt(id));
+        if (quoteIndex !== -1) {
+            console.log("good index");
+            data_1.quotes[quoteIndex] = { quote, person, id: +id };
+            res.status(200).send({ quote: data_1.quotes[quoteIndex] });
+        }
+        else {
+            console.log("bad index");
+            res.status(400).send("Invalid quote id");
+        }
+    }
+    else {
+        console.log("bad data");
+        res.status(400).send("Invalid quote format");
+    }
+};
+exports.putQuote = putQuote;
 //# sourceMappingURL=quotes.controllers.js.map

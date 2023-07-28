@@ -10,4 +10,5 @@ exports.quotesRouter = express_1.default.Router();
 exports.quotesRouter.get("/", quotes_controllers_1.getQuotes);
 exports.quotesRouter.get("/random", quotes_controllers_1.getRandomQuote);
 exports.quotesRouter.post("/", quotes_controllers_1.postQuote);
+exports.quotesRouter.put("/:id", quotes_controllers_1.putQuote);
 //# sourceMappingURL=quotes.router.js.map
